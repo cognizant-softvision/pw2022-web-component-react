@@ -1,25 +1,41 @@
-import logo from './logo.svg';
+import { useEffect, useRef } from "react";
+import './webcomponents/modal.js';
 import './App.css';
+const App = () => {
+  const modalRef = useRef(null);
+  
+  useEffect(() => {
+    const modalRefCurrent = modalRef.current;
+    if (modalRefCurrent) {
+      modalRefCurrent.addEventListener('onClose', modalRefCurrent.hideModal);
+    }
 
-function App() {
+    return () => {
+      modalRefCurrent.removeEventListener('onClose', modalRefCurrent.hideModal);
+    }
+  }, []);
+
+  const openModal = () => {
+    if (modalRef.current) {
+      modalRef.current.showModal();
+    }
+  }
+
+  const hideModal = () => {
+    if (modalRef.current) {
+      modalRef.current.hideModal();
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1> Modal web component </h1>
+      <prw-modal ref={modalRef} title="Awesome Modal" onClose={hideModal}>
+        <p> Powered by web components.</p>
+        <button className="btn" onClick={hideModal}> Close modal </button>
+      </prw-modal>
+      <button className="btn" onClick={openModal}> Open modal</button>
+    </>
   );
 }
-
 export default App;
