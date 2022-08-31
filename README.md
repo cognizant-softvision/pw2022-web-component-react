@@ -9,4 +9,5 @@ This project is a brief example of how to use web components in an React app.
 
 ## Useful Links
 [Programmer's week - Web components](https://github.com/cognizant-softvision/pw2022-web-components)
+
 [Web components in Angular](https://github.com/cognizant-softvision/pw2022-web-component-angular)
